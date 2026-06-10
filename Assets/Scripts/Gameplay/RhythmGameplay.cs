@@ -68,7 +68,7 @@ namespace DualBeat.Gameplay
         private RectTransform playfieldParent;
 
         // UI note layout settings
-        private const float uiJudgmentY = 100f;
+        private float actualJudgmentY = 100f;
         private const float uiSpawnY = 900f;
         private const float uiScrollSpeed = 400f;
 
@@ -110,7 +110,7 @@ namespace DualBeat.Gameplay
                 // 2. Create keypress indicators (Q, W, E, I, O, P) at the bottom of the centered field
                 CreateKeyIndicators(p1Field);
 
-                // 3. Configure JudgmentLine to be red and positioned at uiJudgmentY (100f)
+                // 3. Configure JudgmentLine to be red and read its Y position
                 Transform judgmentLineTrans = p1Field.transform.Find("JudgmentLine");
                 if (judgmentLineTrans != null)
                 {
@@ -122,7 +122,7 @@ namespace DualBeat.Gameplay
                     RectTransform judgmentRect = judgmentLineTrans.GetComponent<RectTransform>();
                     if (judgmentRect != null)
                     {
-                        judgmentRect.anchoredPosition = new Vector2(judgmentRect.anchoredPosition.x, uiJudgmentY);
+                        actualJudgmentY = judgmentRect.anchoredPosition.y;
                     }
                 }
             }
@@ -202,7 +202,15 @@ namespace DualBeat.Gameplay
                     GameObject visual = Instantiate(myNotePrefab, playfieldParent);
                     
                     float targetX = -fieldWidth / 2f + (lane + 0.5f) * laneWidth;
-                    visual.transform.localPosition = new Vector3(targetX, uiSpawnY, 0);
+                    RectTransform noteRect = visual.GetComponent<RectTransform>();
+                    if (noteRect != null)
+                    {
+                        // Align note's anchors to bottom-center (same coordinate system as JudgmentLine's Y anchor)
+                        noteRect.anchorMin = new Vector2(0.5f, 0f);
+                        noteRect.anchorMax = new Vector2(0.5f, 0f);
+                        noteRect.pivot = new Vector2(0.5f, 0.5f);
+                        noteRect.anchoredPosition = new Vector2(targetX, uiSpawnY);
+                    }
                     visual.transform.localScale = Vector3.one;
 
                     activeNotes.Add(new ActiveNote
@@ -241,12 +249,16 @@ namespace DualBeat.Gameplay
                 float timeOffset = note.hitTime - (float)currentSongTime;
                 
                 // UI Coordinate mapping using layout constants
-                float newY = uiJudgmentY + (timeOffset * uiScrollSpeed);
+                float newY = actualJudgmentY + (timeOffset * uiScrollSpeed);
 
                 // Align X coordinate inside the centered playfieldParent RectTransform
                 float targetX = -fieldWidth / 2f + (note.lane + 0.5f) * laneWidth;
 
-                note.visualObject.transform.localPosition = new Vector3(targetX, newY, 0);
+                RectTransform noteRect = note.visualObject.GetComponent<RectTransform>();
+                if (noteRect != null)
+                {
+                    noteRect.anchoredPosition = new Vector2(targetX, newY);
+                }
             }
         }
 
@@ -382,7 +394,7 @@ namespace DualBeat.Gameplay
 
                 if (smallestDiff < 0.05f)
                 {
-                    rating = "<color=cyan>PERFECT</color>";
+                    rating = "<color=blue>PERFECT</color>";
                     scoreGain = 1000;
                     currentCombo++;
                 }
