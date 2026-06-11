@@ -1,27 +1,58 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace DualBeat.Gameplay
 {
     [CreateAssetMenu(fileName = "NewSongData", menuName = "Rhythm Game/Song Data", order = 1)]
     public class SongData : ScriptableObject
     {
+        [System.Serializable]
+        public struct NoteInfo
+        {
+            public float beat;
+            public int lane;
+        }
+
         [Header("Song Info")]
         public string songTitle;
         public string artistName;
         public float bpm;
         public AudioClip audioClip;
 
-        [Header("Beatmap Chart")]
-        [Tooltip("The time in seconds when each note should hit the judgment line.")]
+        [Header("BPM & Beat Chart")]
+        public List<NoteInfo> notes = new List<NoteInfo>();
+
+        [Header("Legacy Chart (Deprecated)")]
+        [System.Obsolete("Use notes instead of hitTimes.")]
+        [HideInInspector]
         public float[] hitTimes;
 
-        [Tooltip("The lane index (0 to 5) for each note corresponding to the hitTime index.")]
+        [System.Obsolete("Use notes instead of lanes.")]
+        [HideInInspector]
         public int[] lanes;
 
-        // Simple check to ensure chart arrays are equal in length
         public bool IsChartValid()
         {
-            return hitTimes != null && lanes != null && hitTimes.Length == lanes.Length;
+            return notes != null && notes.Count > 0;
+        }
+
+        private void OnValidate()
+        {
+            // Auto-migrate old hitTimes & lanes to the new BPM/Beat-based notes list
+            #if UNITY_EDITOR
+            if ((notes == null || notes.Count == 0) && hitTimes != null && hitTimes.Length > 0 && bpm > 0)
+            {
+                notes = new List<NoteInfo>();
+                int length = Mathf.Min(hitTimes.Length, lanes != null ? lanes.Length : 0);
+                for (int i = 0; i < length; i++)
+                {
+                    float beat = hitTimes[i] * (bpm / 60f);
+                    notes.Add(new NoteInfo { beat = beat, lane = lanes[i] });
+                }
+                Debug.Log($"[SongData] Migrated {notes.Count} notes from hitTimes to Beat-based notes in SongData '{name}'.");
+                UnityEditor.EditorUtility.SetDirty(this);
+            }
+            #endif
         }
     }
 }

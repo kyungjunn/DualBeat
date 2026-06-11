@@ -21,7 +21,7 @@ namespace DualBeat.Gameplay
 
         [SerializeField] private float spawnYPosition = 8f;
         [SerializeField] private float judgmentYPosition = -4f;
-        [SerializeField] private float scrollSpeed = 5f; // Units per second
+        [SerializeField] private float scrollSpeed = 5f; // UI Scroll speed (pixels per second)
 
         [Header("Audio")]
         [SerializeField] private AudioSource audioSource;
@@ -37,30 +37,17 @@ namespace DualBeat.Gameplay
             KeyCode.I, KeyCode.O, KeyCode.P
         };
 
-        // Song timing state
-        private SongData activeSong;
-        private double songStartTime = -1;
-        private bool songPlaying = false;
+        // Decoupled sub-systems
+        private RhythmClock rhythmClock;
+        private NoteSpawner noteSpawner;
+        private JudgeSystem judgeSystem;
+        private ScoreManager scoreManager;
+        private ChartData chartData;
 
-        // Note tracking structure
-        private class ActiveNote
-        {
-            public float hitTime;
-            public int lane;
-            public GameObject visualObject;
-            public bool isMyNote;
-        }
-
-        private List<ActiveNote> activeNotes = new List<ActiveNote>();
-        
-        // Track the index of the next note to spawn from SongData
+        // Runtime states
+        private List<NoteView> activeNotes = new List<NoteView>();
         private int myNextNoteIndex = 0;
-        private int opponentNextNoteIndex = 0;
-
-        // Local gameplay scoring state
-        private int currentScore = 0;
-        private int currentCombo = 0;
-        private int maxCombo = 0;
+        private bool songPlaying = false;
 
         // Key feedback UI
         private UnityEngine.UI.Image[] keyBackgrounds = new UnityEngine.UI.Image[6];
@@ -69,8 +56,6 @@ namespace DualBeat.Gameplay
 
         // UI note layout settings
         private float actualJudgmentY = 100f;
-        private const float uiSpawnY = 900f;
-        private const float uiScrollSpeed = 400f;
 
         private void Awake()
         {
@@ -80,6 +65,28 @@ namespace DualBeat.Gameplay
                 return;
             }
             Instance = this;
+
+            // Get or Add sub-systems automatically
+            rhythmClock = GetComponent<RhythmClock>();
+            if (rhythmClock == null) rhythmClock = gameObject.AddComponent<RhythmClock>();
+
+            noteSpawner = GetComponent<NoteSpawner>();
+            if (noteSpawner == null) noteSpawner = gameObject.AddComponent<NoteSpawner>();
+
+            judgeSystem = GetComponent<JudgeSystem>();
+            if (judgeSystem == null) judgeSystem = gameObject.AddComponent<JudgeSystem>();
+
+            scoreManager = GetComponent<ScoreManager>();
+            if (scoreManager == null) scoreManager = gameObject.AddComponent<ScoreManager>();
+        }
+
+        private void OnValidate()
+        {
+            if (scrollSpeed == 5f)
+            {
+                scrollSpeed = 400f;
+                Debug.Log("[RhythmGameplay] Automatically migrated scrollSpeed from legacy 5f to 400f.");
+            }
         }
 
         private void Start()
@@ -126,145 +133,72 @@ namespace DualBeat.Gameplay
                     }
                 }
             }
+
+            // Initialize sub-systems
+            noteSpawner.Initialize(playfieldParent, actualJudgmentY, myNotePrefab, scrollSpeed, 2.0f);
+            scoreManager.Initialize(comboText, ratingText);
+            judgeSystem.Initialize(scoreManager);
         }
 
         public void StartSong(SongData song, double networkStartTime)
         {
-            activeSong = song;
-            songStartTime = networkStartTime;
-            songPlaying = true;
-
+            chartData = new ChartData(song);
             myNextNoteIndex = 0;
-            opponentNextNoteIndex = 0;
+            activeNotes.Clear();
+            scoreManager.ResetScore();
 
             if (audioSource != null && song.audioClip != null)
             {
                 audioSource.clip = song.audioClip;
                 double delay = networkStartTime - PhotonNetwork.Time;
+                
                 if (delay > 0)
                 {
-                    audioSource.PlayScheduled(AudioSettings.dspTime + delay);
+                    double dspStartTime = AudioSettings.dspTime + delay;
+                    audioSource.PlayScheduled(dspStartTime);
+                    rhythmClock.StartClock(dspStartTime);
                 }
                 else
                 {
-                    audioSource.time = (float)(-delay);
                     audioSource.Play();
+                    audioSource.time = (float)(-delay);
+                    
+                    double dspStartTime = AudioSettings.dspTime + delay;
+                    rhythmClock.StartClock(dspStartTime);
                 }
             }
 
+            songPlaying = true;
             Debug.Log($"Initialized song '{song.songTitle}' locally.");
         }
 
         private void Update()
         {
-            if (!songPlaying || activeSong == null) return;
+            if (!songPlaying || chartData == null) return;
 
-            // 1. Calculate precise current song playback time based on network clock
-            double currentSongTime = PhotonNetwork.Time - songStartTime;
+            double currentSongTime = rhythmClock.SongTime;
 
-            // 2. Handle note spawning (local preview of my side & opponent's side)
-            SpawnApproachingNotes(currentSongTime);
+            // 1. Spawning
+            noteSpawner.SpawnNotes(currentSongTime, chartData, ref myNextNoteIndex, activeNotes);
 
-            // 3. Update active notes' positions frame-rate independently
-            UpdateNotePositions(currentSongTime);
+            // 2. Note Position updates
+            for (int i = 0; i < activeNotes.Count; i++)
+            {
+                if (activeNotes[i] != null)
+                {
+                    activeNotes[i].UpdatePosition(currentSongTime);
+                }
+            }
 
-            // 4. Evaluate keyboard inputs for 6 lanes
+            // 3. Inputs
             HandleKeyboardInput(currentSongTime);
 
-            // 5. Automatic miss processing for notes that passed unhit
-            HandleMissProcessing(currentSongTime);
+            // 4. Auto-miss processing
+            judgeSystem.ProcessMisses(currentSongTime, activeNotes);
 
-            // 6. Check song completion
+            // 5. Completion check
             CheckSongCompletion(currentSongTime);
         }
-
-        #region Spawning & Positioning
-
-        private void SpawnApproachingNotes(double currentSongTime)
-        {
-            // Spawn ahead of time (e.g. 2 seconds before they hit judgment line)
-            float lookAheadTime = 2f;
-
-            if (playfieldParent == null) return;
-            float fieldWidth = playfieldParent.rect.width;
-            float laneWidth = fieldWidth / 6f;
-
-            // Spawn My Notes
-            while (myNextNoteIndex < activeSong.hitTimes.Length &&
-                   activeSong.hitTimes[myNextNoteIndex] - currentSongTime <= lookAheadTime)
-            {
-                float hitTime = activeSong.hitTimes[myNextNoteIndex];
-                int lane = activeSong.lanes[myNextNoteIndex];
-
-                if (lane >= 0 && lane < 6 && myNotePrefab != null)
-                {
-                    // Instantiate UI note under playfieldParent (Player1Field in Screen Space - Overlay Canvas)
-                    GameObject visual = Instantiate(myNotePrefab, playfieldParent);
-                    
-                    float targetX = -fieldWidth / 2f + (lane + 0.5f) * laneWidth;
-                    RectTransform noteRect = visual.GetComponent<RectTransform>();
-                    if (noteRect != null)
-                    {
-                        // Align note's anchors to bottom-center (same coordinate system as JudgmentLine's Y anchor)
-                        noteRect.anchorMin = new Vector2(0.5f, 0f);
-                        noteRect.anchorMax = new Vector2(0.5f, 0f);
-                        noteRect.pivot = new Vector2(0.5f, 0.5f);
-                        noteRect.anchoredPosition = new Vector2(targetX, uiSpawnY);
-                    }
-                    visual.transform.localScale = Vector3.one;
-
-                    activeNotes.Add(new ActiveNote
-                    {
-                        hitTime = hitTime,
-                        lane = lane,
-                        visualObject = visual,
-                        isMyNote = true
-                    });
-                }
-
-                myNextNoteIndex++;
-            }
-
-            // Spawn Opponent Notes (simulated side-by-side visuals) - disabled for local-only view
-            while (opponentNextNoteIndex < activeSong.hitTimes.Length &&
-                   activeSong.hitTimes[opponentNextNoteIndex] - currentSongTime <= lookAheadTime)
-            {
-                opponentNextNoteIndex++;
-            }
-        }
-
-        private void UpdateNotePositions(double currentSongTime)
-        {
-            if (playfieldParent == null) return;
-
-            float fieldWidth = playfieldParent.rect.width;
-            float laneWidth = fieldWidth / 6f;
-
-            for (int i = activeNotes.Count - 1; i >= 0; i--)
-            {
-                ActiveNote note = activeNotes[i];
-                if (note.visualObject == null) continue;
-
-                // Position based on math: y = judgmentPos + (hitTime - currentSongTime) * scrollSpeed
-                float timeOffset = note.hitTime - (float)currentSongTime;
-                
-                // UI Coordinate mapping using layout constants
-                float newY = actualJudgmentY + (timeOffset * uiScrollSpeed);
-
-                // Align X coordinate inside the centered playfieldParent RectTransform
-                float targetX = -fieldWidth / 2f + (note.lane + 0.5f) * laneWidth;
-
-                RectTransform noteRect = note.visualObject.GetComponent<RectTransform>();
-                if (noteRect != null)
-                {
-                    noteRect.anchoredPosition = new Vector2(targetX, newY);
-                }
-            }
-        }
-
-        #endregion
-
-        #region Keyboard Inputs
 
         private void HandleKeyboardInput(double currentSongTime)
         {
@@ -272,7 +206,7 @@ namespace DualBeat.Gameplay
             {
                 if (Input.GetKeyDown(inputKeys[lane]))
                 {
-                    EvaluateHit(lane, currentSongTime);
+                    judgeSystem.EvaluateKeyPress(lane, currentSongTime, activeNotes);
                     AnimateKeyPress(lane, true);
                 }
 
@@ -280,6 +214,21 @@ namespace DualBeat.Gameplay
                 {
                     AnimateKeyPress(lane, false);
                 }
+            }
+        }
+
+        private void CheckSongCompletion(double currentSongTime)
+        {
+            bool allNotesSpawned = myNextNoteIndex >= chartData.notes.Count;
+            bool allNotesProcessed = allNotesSpawned && activeNotes.Count == 0;
+            bool audioFinished = audioSource != null && !audioSource.isPlaying && currentSongTime > 3.0;
+
+            if ((allNotesProcessed || audioFinished) && songPlaying)
+            {
+                songPlaying = false;
+                rhythmClock.StopClock();
+                Debug.Log("Local gameplay track completed.");
+                GameSyncManager.Instance.SetLocalFinished();
             }
         }
 
@@ -365,128 +314,5 @@ namespace DualBeat.Gameplay
                 }
             }
         }
-
-        private void EvaluateHit(int lane, double currentSongTime)
-        {
-            // Find the oldest unhit note in my lane
-            ActiveNote targetNote = null;
-            float smallestDiff = float.MaxValue;
-
-            for (int i = 0; i < activeNotes.Count; i++)
-            {
-                ActiveNote note = activeNotes[i];
-                if (note.isMyNote && note.lane == lane)
-                {
-                    float diff = Mathf.Abs(note.hitTime - (float)currentSongTime);
-                    if (diff < smallestDiff)
-                    {
-                        smallestDiff = diff;
-                        targetNote = note;
-                    }
-                }
-            }
-
-            if (targetNote != null && smallestDiff <= 0.18f)
-            {
-                // Assign Rating based on precision windows
-                string rating = "";
-                int scoreGain = 0;
-
-                if (smallestDiff < 0.05f)
-                {
-                    rating = "<color=blue>PERFECT</color>";
-                    scoreGain = 1000;
-                    currentCombo++;
-                }
-                else if (smallestDiff < 0.09f)
-                {
-                    rating = "<color=green>GOOD</color>";
-                    scoreGain = 600;
-                    currentCombo++;
-                }
-                else if (smallestDiff < 0.13f)
-                {
-                    rating = "<color=yellow>NORMAL</color>";
-                    scoreGain = 300;
-                    currentCombo++;
-                }
-                else if (smallestDiff < 0.18f)
-                {
-                    rating = "<color=orange>BAD</color>";
-                    scoreGain = 100;
-                    currentCombo = 0; // Bad breaks combo or keeps it? Typically breaks.
-                }
-
-                currentScore += scoreGain;
-                if (currentCombo > maxCombo) maxCombo = currentCombo;
-
-                ShowHitFeedback(rating);
-                
-                // Tell GameSyncManager about new score
-                GameSyncManager.Instance.UpdateLocalScore(currentScore);
-
-                // Destroy note
-                activeNotes.Remove(targetNote);
-                Destroy(targetNote.visualObject);
-            }
-        }
-
-        private void HandleMissProcessing(double currentSongTime)
-        {
-            for (int i = activeNotes.Count - 1; i >= 0; i--)
-            {
-                ActiveNote note = activeNotes[i];
-                
-                // Miss occurs if note goes beyond the -0.18s window
-                float diff = (float)currentSongTime - note.hitTime;
-                
-                if (diff > 0.18f)
-                {
-                    if (note.isMyNote)
-                    {
-                        currentCombo = 0;
-                        ShowHitFeedback("<color=red>MISS</color>");
-                    }
-
-                    activeNotes.RemoveAt(i);
-                    if (note.visualObject != null)
-                    {
-                        Destroy(note.visualObject);
-                    }
-                }
-            }
-        }
-
-        private void ShowHitFeedback(string rating)
-        {
-            if (ratingText != null) ratingText.text = rating;
-            if (comboText != null)
-            {
-                comboText.text = currentCombo > 0 ? $"{currentCombo} COMBO" : "";
-            }
-        }
-
-        #endregion
-
-        #region Completion
-
-        private void CheckSongCompletion(double currentSongTime)
-        {
-            // Verify if all notes have been spawned and evaluated AND the audio track finished
-            bool allNotesProcessed = myNextNoteIndex >= activeSong.hitTimes.Length &&
-                                     opponentNextNoteIndex >= activeSong.hitTimes.Length &&
-                                     activeNotes.Count == 0;
-
-            bool audioFinished = audioSource != null && !audioSource.isPlaying && currentSongTime > 3.0;
-
-            if ((allNotesProcessed || audioFinished) && songPlaying)
-            {
-                songPlaying = false;
-                Debug.Log("Local gameplay track completed.");
-                GameSyncManager.Instance.SetLocalFinished();
-            }
-        }
-
-        #endregion
     }
 }

@@ -16,6 +16,1167 @@ MonoBehaviour:
   artistName: Unknown
   bpm: 130
   audioClip: {fileID: 8300000, guid: 641f469e282b1c84e88bb0d0dacf560c, type: 3}
+  notes:
+  - beat: 4.3333335
+    lane: 2
+  - beat: 4.3333335
+    lane: 0
+  - beat: 5.3333335
+    lane: 4
+  - beat: 6.333334
+    lane: 3
+  - beat: 7.333334
+    lane: 0
+  - beat: 8.333334
+    lane: 1
+  - beat: 9.333334
+    lane: 2
+  - beat: 10.333334
+    lane: 1
+  - beat: 11.333333
+    lane: 4
+  - beat: 11.833333
+    lane: 3
+  - beat: 11.833333
+    lane: 3
+  - beat: 12.833333
+    lane: 1
+  - beat: 13.833332
+    lane: 2
+  - beat: 14.833332
+    lane: 5
+  - beat: 15.833332
+    lane: 4
+  - beat: 16.833332
+    lane: 3
+  - beat: 17.833332
+    lane: 2
+  - beat: 18.83333
+    lane: 5
+  - beat: 20.83333
+    lane: 0
+  - beat: 20.83333
+    lane: 0
+  - beat: 21.83333
+    lane: 4
+  - beat: 22.83333
+    lane: 3
+  - beat: 23.833328
+    lane: 0
+  - beat: 24.833328
+    lane: 5
+  - beat: 25.833328
+    lane: 1
+  - beat: 26.833328
+    lane: 2
+  - beat: 27.833328
+    lane: 5
+  - beat: 28.333328
+    lane: 4
+  - beat: 28.333328
+    lane: 5
+  - beat: 29.333328
+    lane: 3
+  - beat: 30.333326
+    lane: 2
+  - beat: 31.333326
+    lane: 5
+  - beat: 32.33333
+    lane: 0
+  - beat: 33.333324
+    lane: 4
+  - beat: 34.333324
+    lane: 3
+  - beat: 35.33333
+    lane: 0
+  - beat: 37.33333
+    lane: 5
+  - beat: 37.33333
+    lane: 0
+  - beat: 38.33333
+    lane: 4
+  - beat: 39.33333
+    lane: 5
+  - beat: 40.333324
+    lane: 2
+  - beat: 41.333324
+    lane: 1
+  - beat: 42.333324
+    lane: 1
+  - beat: 43.333324
+    lane: 0
+  - beat: 44.333324
+    lane: 3
+  - beat: 44.83333
+    lane: 4
+  - beat: 44.83333
+    lane: 4
+  - beat: 45.83333
+    lane: 2
+  - beat: 46.833324
+    lane: 1
+  - beat: 47.833324
+    lane: 4
+  - beat: 48.833324
+    lane: 3
+  - beat: 49.833324
+    lane: 3
+  - beat: 50.833324
+    lane: 4
+  - beat: 51.833324
+    lane: 1
+  - beat: 53.833324
+    lane: 0
+  - beat: 53.833324
+    lane: 2
+  - beat: 54.833324
+    lane: 0
+  - beat: 55.833324
+    lane: 5
+  - beat: 56.833324
+    lane: 2
+  - beat: 57.83332
+    lane: 3
+  - beat: 58.83332
+    lane: 4
+  - beat: 59.83332
+    lane: 3
+  - beat: 60.83332
+    lane: 0
+  - beat: 61.333324
+    lane: 5
+  - beat: 61.333324
+    lane: 5
+  - beat: 62.333324
+    lane: 3
+  - beat: 63.333324
+    lane: 4
+  - beat: 64.33332
+    lane: 1
+  - beat: 65.33332
+    lane: 0
+  - beat: 66.33332
+    lane: 1
+  - beat: 67.33332
+    lane: 0
+  - beat: 68.33332
+    lane: 3
+  - beat: 70.33332
+    lane: 4
+  - beat: 70.33332
+    lane: 2
+  - beat: 71.33333
+    lane: 0
+  - beat: 72.33333
+    lane: 5
+  - beat: 73.33333
+    lane: 2
+  - beat: 74.333336
+    lane: 1
+  - beat: 75.33334
+    lane: 1
+  - beat: 76.33334
+    lane: 2
+  - beat: 77.33334
+    lane: 5
+  - beat: 77.83335
+    lane: 4
+  - beat: 77.83335
+    lane: 2
+  - beat: 78.83335
+    lane: 0
+  - beat: 79.83336
+    lane: 5
+  - beat: 80.83336
+    lane: 2
+  - beat: 81.83337
+    lane: 3
+  - beat: 82.83337
+    lane: 3
+  - beat: 83.833374
+    lane: 2
+  - beat: 84.833374
+    lane: 5
+  - beat: 86.833374
+    lane: 4
+  - beat: 86.833374
+    lane: 1
+  - beat: 87.83338
+    lane: 5
+  - beat: 88.83338
+    lane: 0
+  - beat: 89.83339
+    lane: 3
+  - beat: 90.83339
+    lane: 2
+  - beat: 91.8334
+    lane: 4
+  - beat: 92.8334
+    lane: 3
+  - beat: 93.833405
+    lane: 0
+  - beat: 94.333405
+    lane: 1
+  - beat: 94.333405
+    lane: 1
+  - beat: 95.333405
+    lane: 5
+  - beat: 96.33341
+    lane: 4
+  - beat: 97.33341
+    lane: 1
+  - beat: 98.33342
+    lane: 0
+  - beat: 99.33342
+    lane: 2
+  - beat: 100.33343
+    lane: 3
+  - beat: 101.33343
+    lane: 0
+  - beat: 103.33343
+    lane: 5
+  - beat: 103.33343
+    lane: 5
+  - beat: 104.333435
+    lane: 3
+  - beat: 105.333435
+    lane: 2
+  - beat: 106.33344
+    lane: 5
+  - beat: 107.33344
+    lane: 0
+  - beat: 108.33345
+    lane: 5
+  - beat: 109.33345
+    lane: 4
+  - beat: 110.33346
+    lane: 1
+  - beat: 110.83346
+    lane: 0
+  - beat: 110.83346
+    lane: 1
+  - beat: 111.833466
+    lane: 5
+  - beat: 112.833466
+    lane: 0
+  - beat: 113.83347
+    lane: 3
+  - beat: 114.83347
+    lane: 2
+  - beat: 115.83348
+    lane: 1
+  - beat: 116.83348
+    lane: 0
+  - beat: 117.83349
+    lane: 3
+  - beat: 119.83348
+    lane: 4
+  - beat: 119.83348
+    lane: 5
+  - beat: 120.83349
+    lane: 3
+  - beat: 121.83349
+    lane: 2
+  - beat: 122.833496
+    lane: 5
+  - beat: 123.833496
+    lane: 4
+  - beat: 124.8335
+    lane: 3
+  - beat: 125.8335
+    lane: 4
+  - beat: 126.83351
+    lane: 1
+  - beat: 127.33351
+    lane: 0
+  - beat: 127.33351
+    lane: 2
+  - beat: 128.33351
+    lane: 0
+  - beat: 129.33353
+    lane: 5
+  - beat: 130.33353
+    lane: 2
+  - beat: 131.33353
+    lane: 3
+  - beat: 132.33353
+    lane: 5
+  - beat: 133.33354
+    lane: 4
+  - beat: 134.33354
+    lane: 1
+  - beat: 136.33354
+    lane: 0
+  - beat: 136.33354
+    lane: 0
+  - beat: 137.33354
+    lane: 4
+  - beat: 138.33354
+    lane: 5
+  - beat: 139.33356
+    lane: 2
+  - beat: 140.33356
+    lane: 1
+  - beat: 141.33356
+    lane: 0
+  - beat: 142.33356
+    lane: 5
+  - beat: 143.33357
+    lane: 2
+  - beat: 143.83356
+    lane: 3
+  - beat: 143.83356
+    lane: 5
+  - beat: 144.83356
+    lane: 3
+  - beat: 145.83357
+    lane: 2
+  - beat: 146.83357
+    lane: 5
+  - beat: 147.83357
+    lane: 4
+  - beat: 148.83357
+    lane: 4
+  - beat: 149.83359
+    lane: 5
+  - beat: 150.83359
+    lane: 2
+  - beat: 152.83359
+    lane: 1
+  - beat: 152.83359
+    lane: 4
+  - beat: 153.8336
+    lane: 2
+  - beat: 154.8336
+    lane: 1
+  - beat: 155.8336
+    lane: 4
+  - beat: 156.8336
+    lane: 5
+  - beat: 157.83362
+    lane: 1
+  - beat: 158.83362
+    lane: 0
+  - beat: 159.83362
+    lane: 3
+  - beat: 160.33362
+    lane: 2
+  - beat: 160.33362
+    lane: 5
+  - beat: 161.33362
+    lane: 3
+  - beat: 162.33362
+    lane: 4
+  - beat: 163.33362
+    lane: 1
+  - beat: 164.33363
+    lane: 0
+  - beat: 165.33363
+    lane: 5
+  - beat: 166.33363
+    lane: 4
+  - beat: 167.33365
+    lane: 1
+  - beat: 169.33365
+    lane: 2
+  - beat: 169.33365
+    lane: 3
+  - beat: 170.33365
+    lane: 1
+  - beat: 171.33365
+    lane: 0
+  - beat: 172.33366
+    lane: 3
+  - beat: 173.33366
+    lane: 2
+  - beat: 174.33366
+    lane: 3
+  - beat: 175.33368
+    lane: 4
+  - beat: 176.33368
+    lane: 1
+  - beat: 176.83366
+    lane: 0
+  - beat: 176.83366
+    lane: 4
+  - beat: 177.83368
+    lane: 2
+  - beat: 178.83368
+    lane: 1
+  - beat: 179.83368
+    lane: 4
+  - beat: 180.83368
+    lane: 5
+  - beat: 181.8337
+    lane: 3
+  - beat: 182.8337
+    lane: 2
+  - beat: 183.8337
+    lane: 5
+  - beat: 185.83371
+    lane: 4
+  - beat: 185.83371
+    lane: 4
+  - beat: 186.83371
+    lane: 2
+  - beat: 187.83371
+    lane: 3
+  - beat: 188.83371
+    lane: 0
+  - beat: 189.83372
+    lane: 5
+  - beat: 190.83372
+    lane: 1
+  - beat: 191.83372
+    lane: 0
+  - beat: 192.83372
+    lane: 3
+  - beat: 193.33372
+    lane: 4
+  - beat: 193.33372
+    lane: 1
+  - beat: 194.33372
+    lane: 5
+  - beat: 195.33372
+    lane: 4
+  - beat: 196.33374
+    lane: 1
+  - beat: 197.33374
+    lane: 0
+  - beat: 198.33374
+    lane: 4
+  - beat: 199.33374
+    lane: 5
+  - beat: 200.33376
+    lane: 2
+  - beat: 202.33376
+    lane: 1
+  - beat: 202.33376
+    lane: 2
+  - beat: 203.33376
+    lane: 0
+  - beat: 204.33377
+    lane: 5
+  - beat: 205.33377
+    lane: 2
+  - beat: 206.33377
+    lane: 3
+  - beat: 207.33377
+    lane: 5
+  - beat: 208.33379
+    lane: 4
+  - beat: 209.33379
+    lane: 1
+  - beat: 209.83377
+    lane: 0
+  - beat: 209.83377
+    lane: 2
+  - beat: 210.83379
+    lane: 0
+  - beat: 211.83379
+    lane: 1
+  - beat: 212.83379
+    lane: 4
+  - beat: 213.83379
+    lane: 3
+  - beat: 214.8338
+    lane: 4
+  - beat: 215.8338
+    lane: 3
+  - beat: 216.8338
+    lane: 0
+  - beat: 218.83382
+    lane: 1
+  - beat: 218.83382
+    lane: 1
+  - beat: 219.83382
+    lane: 5
+  - beat: 220.83382
+    lane: 4
+  - beat: 221.83382
+    lane: 1
+  - beat: 222.83383
+    lane: 0
+  - beat: 223.83383
+    lane: 5
+  - beat: 224.83383
+    lane: 0
+  - beat: 225.83383
+    lane: 3
+  - beat: 226.33383
+    lane: 2
+  - beat: 226.33383
+    lane: 2
+  - beat: 227.33383
+    lane: 0
+  - beat: 228.33385
+    lane: 5
+  - beat: 229.33385
+    lane: 2
+  - beat: 230.33385
+    lane: 3
+  - beat: 231.33385
+    lane: 5
+  - beat: 232.33386
+    lane: 4
+  - beat: 233.33386
+    lane: 1
+  - beat: 235.33386
+    lane: 0
+  - beat: 235.33386
+    lane: 2
+  - beat: 236.33388
+    lane: 0
+  - beat: 237.33388
+    lane: 1
+  - beat: 238.33388
+    lane: 4
+  - beat: 239.33388
+    lane: 3
+  - beat: 240.3339
+    lane: 4
+  - beat: 241.3339
+    lane: 3
+  - beat: 242.3339
+    lane: 0
+  - beat: 242.8339
+    lane: 1
+  - beat: 242.8339
+    lane: 3
+  - beat: 243.8339
+    lane: 1
+  - beat: 244.8339
+    lane: 0
+  - beat: 245.8339
+    lane: 3
+  - beat: 246.83391
+    lane: 2
+  - beat: 247.83391
+    lane: 3
+  - beat: 248.83391
+    lane: 4
+  - beat: 249.83391
+    lane: 1
+  - beat: 251.83392
+    lane: 0
+  - beat: 251.83392
+    lane: 3
+  - beat: 252.83392
+    lane: 1
+  - beat: 253.83392
+    lane: 0
+  - beat: 254.83394
+    lane: 3
+  - beat: 255.83394
+    lane: 4
+  - beat: 256.83395
+    lane: 0
+  - beat: 257.83395
+    lane: 5
+  - beat: 258.83395
+    lane: 2
+  - beat: 259.33395
+    lane: 1
+  - beat: 259.33395
+    lane: 1
+  - beat: 260.33395
+    lane: 5
+  - beat: 261.33395
+    lane: 0
+  - beat: 262.33395
+    lane: 3
+  - beat: 263.33395
+    lane: 2
+  - beat: 264.33395
+    lane: 1
+  - beat: 265.33395
+    lane: 0
+  - beat: 266.33398
+    lane: 3
+  - beat: 268.33398
+    lane: 4
+  - beat: 268.33398
+    lane: 4
+  - beat: 269.33398
+    lane: 2
+  - beat: 270.33398
+    lane: 1
+  - beat: 271.33398
+    lane: 4
+  - beat: 272.33398
+    lane: 3
+  - beat: 273.33398
+    lane: 2
+  - beat: 274.33398
+    lane: 3
+  - beat: 275.334
+    lane: 0
+  - beat: 275.83398
+    lane: 5
+  - beat: 275.83398
+    lane: 3
+  - beat: 276.834
+    lane: 1
+  - beat: 277.834
+    lane: 0
+  - beat: 278.83398
+    lane: 3
+  - beat: 279.83398
+    lane: 4
+  - beat: 280.83395
+    lane: 3
+  - beat: 281.83395
+    lane: 2
+  - beat: 282.83395
+    lane: 5
+  - beat: 284.83395
+    lane: 4
+  - beat: 284.83395
+    lane: 5
+  - beat: 285.83392
+    lane: 3
+  - beat: 286.83392
+    lane: 4
+  - beat: 287.83392
+    lane: 1
+  - beat: 288.8339
+    lane: 0
+  - beat: 289.8339
+    lane: 4
+  - beat: 290.83386
+    lane: 3
+  - beat: 291.83386
+    lane: 0
+  - beat: 292.33386
+    lane: 1
+  - beat: 292.33386
+    lane: 3
+  - beat: 293.33386
+    lane: 1
+  - beat: 294.33383
+    lane: 0
+  - beat: 295.33383
+    lane: 3
+  - beat: 296.33383
+    lane: 2
+  - beat: 297.3338
+    lane: 1
+  - beat: 298.3338
+    lane: 2
+  - beat: 299.33377
+    lane: 5
+  - beat: 301.3338
+    lane: 4
+  - beat: 301.3338
+    lane: 0
+  - beat: 302.33377
+    lane: 4
+  - beat: 303.33377
+    lane: 3
+  - beat: 304.33374
+    lane: 0
+  - beat: 305.33374
+    lane: 1
+  - beat: 306.33374
+    lane: 3
+  - beat: 307.3337
+    lane: 2
+  - beat: 308.3337
+    lane: 5
+  - beat: 308.8337
+    lane: 4
+  - beat: 308.8337
+    lane: 5
+  - beat: 309.8337
+    lane: 3
+  - beat: 310.83368
+    lane: 4
+  - beat: 311.83368
+    lane: 1
+  - beat: 312.83365
+    lane: 0
+  - beat: 313.83365
+    lane: 4
+  - beat: 314.83362
+    lane: 3
+  - beat: 315.83362
+    lane: 0
+  - beat: 317.83362
+    lane: 1
+  - beat: 317.83362
+    lane: 1
+  - beat: 318.83362
+    lane: 5
+  - beat: 319.83362
+    lane: 4
+  - beat: 320.8336
+    lane: 1
+  - beat: 321.8336
+    lane: 0
+  - beat: 322.83356
+    lane: 0
+  - beat: 323.83356
+    lane: 1
+  - beat: 324.83353
+    lane: 4
+  - beat: 325.33356
+    lane: 3
+  - beat: 325.33356
+    lane: 3
+  - beat: 326.33353
+    lane: 1
+  - beat: 327.33353
+    lane: 0
+  - beat: 328.3335
+    lane: 3
+  - beat: 329.3335
+    lane: 4
+  - beat: 330.3335
+    lane: 4
+  - beat: 331.33347
+    lane: 3
+  - beat: 332.33347
+    lane: 0
+  - beat: 334.33347
+    lane: 5
+  - beat: 334.33347
+    lane: 0
+  - beat: 335.33347
+    lane: 4
+  - beat: 336.33344
+    lane: 5
+  - beat: 337.33344
+    lane: 2
+  - beat: 338.3334
+    lane: 1
+  - beat: 339.3334
+    lane: 1
+  - beat: 340.3334
+    lane: 0
+  - beat: 341.33337
+    lane: 3
+  - beat: 341.83337
+    lane: 4
+  - beat: 341.83337
+    lane: 1
+  - beat: 342.83337
+    lane: 5
+  - beat: 343.83337
+    lane: 4
+  - beat: 344.83334
+    lane: 1
+  - beat: 345.83334
+    lane: 0
+  - beat: 346.8333
+    lane: 2
+  - beat: 347.8333
+    lane: 3
+  - beat: 348.8333
+    lane: 0
+  - beat: 350.8333
+    lane: 5
+  - beat: 350.8333
+    lane: 5
+  - beat: 351.83328
+    lane: 3
+  - beat: 352.83328
+    lane: 2
+  - beat: 353.83328
+    lane: 5
+  - beat: 354.83325
+    lane: 0
+  - beat: 355.83325
+    lane: 2
+  - beat: 356.83322
+    lane: 1
+  - beat: 357.83322
+    lane: 4
+  - beat: 358.33322
+    lane: 3
+  - beat: 358.33322
+    lane: 1
+  - beat: 359.33322
+    lane: 5
+  - beat: 360.3332
+    lane: 0
+  - beat: 361.3332
+    lane: 3
+  - beat: 362.3332
+    lane: 2
+  - beat: 363.33316
+    lane: 4
+  - beat: 364.33316
+    lane: 3
+  - beat: 365.33313
+    lane: 0
+  - beat: 367.33316
+    lane: 1
+  - beat: 367.33316
+    lane: 4
+  - beat: 368.33313
+    lane: 2
+  - beat: 369.33313
+    lane: 1
+  - beat: 370.3331
+    lane: 4
+  - beat: 371.3331
+    lane: 3
+  - beat: 372.33307
+    lane: 2
+  - beat: 373.33307
+    lane: 3
+  - beat: 374.33307
+    lane: 0
+  - beat: 374.83307
+    lane: 5
+  - beat: 374.83307
+    lane: 1
+  - beat: 375.83307
+    lane: 5
+  - beat: 376.83304
+    lane: 4
+  - beat: 377.83304
+    lane: 1
+  - beat: 378.833
+    lane: 2
+  - beat: 379.833
+    lane: 0
+  - beat: 380.833
+    lane: 5
+  - beat: 381.83298
+    lane: 2
+  - beat: 383.83298
+    lane: 1
+  - beat: 383.83298
+    lane: 5
+  - beat: 384.83298
+    lane: 3
+  - beat: 385.83295
+    lane: 4
+  - beat: 386.83295
+    lane: 1
+  - beat: 387.83295
+    lane: 0
+  - beat: 388.83292
+    lane: 0
+  - beat: 389.83292
+    lane: 5
+  - beat: 390.8329
+    lane: 2
+  - beat: 391.33292
+    lane: 3
+  - beat: 391.33292
+    lane: 1
+  - beat: 392.3329
+    lane: 5
+  - beat: 393.3329
+    lane: 4
+  - beat: 394.3329
+    lane: 1
+  - beat: 395.33286
+    lane: 0
+  - beat: 396.33286
+    lane: 5
+  - beat: 397.33282
+    lane: 0
+  - beat: 398.33282
+    lane: 3
+  - beat: 400.33282
+    lane: 2
+  - beat: 400.33282
+    lane: 4
+  - beat: 401.33282
+    lane: 2
+  - beat: 402.3328
+    lane: 1
+  - beat: 403.3328
+    lane: 4
+  - beat: 404.33276
+    lane: 5
+  - beat: 405.33276
+    lane: 1
+  - beat: 406.33276
+    lane: 0
+  - beat: 407.33273
+    lane: 3
+  - beat: 407.83276
+    lane: 2
+  - beat: 407.83276
+    lane: 0
+  - beat: 408.83273
+    lane: 4
+  - beat: 409.83273
+    lane: 5
+  - beat: 410.8327
+    lane: 2
+  - beat: 411.8327
+    lane: 1
+  - beat: 412.83267
+    lane: 0
+  - beat: 413.83267
+    lane: 5
+  - beat: 414.83267
+    lane: 2
+  - beat: 416.83267
+    lane: 3
+  - beat: 416.83267
+    lane: 4
+  - beat: 417.83264
+    lane: 2
+  - beat: 418.83264
+    lane: 1
+  - beat: 419.83264
+    lane: 4
+  - beat: 420.8326
+    lane: 3
+  - beat: 421.8326
+    lane: 3
+  - beat: 422.83258
+    lane: 4
+  - beat: 423.83258
+    lane: 1
+  - beat: 424.33258
+    lane: 0
+  - beat: 424.33258
+    lane: 3
+  - beat: 425.33258
+    lane: 1
+  - beat: 426.33255
+    lane: 0
+  - beat: 427.33255
+    lane: 3
+  - beat: 428.33255
+    lane: 4
+  - beat: 429.33252
+    lane: 2
+  - beat: 430.33252
+    lane: 1
+  - beat: 431.3325
+    lane: 4
+  - beat: 433.33252
+    lane: 3
+  - beat: 433.33252
+    lane: 5
+  - beat: 434.3325
+    lane: 3
+  - beat: 435.3325
+    lane: 4
+  - beat: 436.33246
+    lane: 1
+  - beat: 437.33246
+    lane: 0
+  - beat: 438.33243
+    lane: 0
+  - beat: 439.33243
+    lane: 5
+  - beat: 440.33243
+    lane: 2
+  - beat: 440.83243
+    lane: 3
+  - beat: 440.83243
+    lane: 3
+  - beat: 441.83243
+    lane: 1
+  - beat: 442.8324
+    lane: 0
+  - beat: 443.8324
+    lane: 3
+  - beat: 444.83237
+    lane: 2
+  - beat: 445.83237
+    lane: 0
+  - beat: 446.83234
+    lane: 1
+  - beat: 447.83234
+    lane: 4
+  - beat: 449.83234
+    lane: 3
+  - beat: 449.83234
+    lane: 1
+  - beat: 450.83234
+    lane: 5
+  - beat: 451.8323
+    lane: 4
+  - beat: 452.8323
+    lane: 1
+  - beat: 453.8323
+    lane: 2
+  - beat: 454.83228
+    lane: 2
+  - beat: 455.83228
+    lane: 1
+  - beat: 456.83224
+    lane: 4
+  - beat: 457.33228
+    lane: 3
+  - beat: 457.33228
+    lane: 4
+  - beat: 458.33224
+    lane: 2
+  - beat: 459.33224
+    lane: 3
+  - beat: 460.3322
+    lane: 0
+  - beat: 461.3322
+    lane: 5
+  - beat: 462.3322
+    lane: 1
+  - beat: 463.33218
+    lane: 0
+  - beat: 464.33218
+    lane: 3
+  - beat: 466.33218
+    lane: 4
+  - beat: 466.33218
+    lane: 1
+  - beat: 467.33218
+    lane: 5
+  - beat: 468.33215
+    lane: 4
+  - beat: 469.33215
+    lane: 1
+  - beat: 470.33212
+    lane: 0
+  - beat: 471.33212
+    lane: 2
+  - beat: 472.33212
+    lane: 3
+  - beat: 473.3321
+    lane: 0
+  - beat: 473.8321
+    lane: 5
+  - beat: 473.8321
+    lane: 1
+  - beat: 474.8321
+    lane: 5
+  - beat: 475.8321
+    lane: 4
+  - beat: 476.83206
+    lane: 1
+  - beat: 477.83206
+    lane: 2
+  - beat: 478.83203
+    lane: 1
+  - beat: 479.83203
+    lane: 0
+  - beat: 480.83203
+    lane: 3
+  - beat: 482.83203
+    lane: 2
+  - beat: 482.83203
+    lane: 4
+  - beat: 483.832
+    lane: 2
+  - beat: 484.832
+    lane: 3
+  - beat: 485.832
+    lane: 0
+  - beat: 486.83197
+    lane: 5
+  - beat: 487.83197
+    lane: 1
+  - beat: 488.83194
+    lane: 0
+  - beat: 489.83194
+    lane: 3
+  - beat: 490.33194
+    lane: 4
+  - beat: 490.33194
+    lane: 5
+  - beat: 491.33194
+    lane: 3
+  - beat: 492.3319
+    lane: 2
+  - beat: 493.3319
+    lane: 5
+  - beat: 494.3319
+    lane: 4
+  - beat: 495.33188
+    lane: 3
+  - beat: 496.33188
+    lane: 4
+  - beat: 497.33185
+    lane: 1
+  - beat: 499.33188
+    lane: 0
+  - beat: 499.33188
+    lane: 1
+  - beat: 500.33185
+    lane: 5
+  - beat: 501.33185
+    lane: 4
+  - beat: 502.33182
+    lane: 1
+  - beat: 503.33182
+    lane: 2
+  - beat: 504.3318
+    lane: 1
+  - beat: 505.3318
+    lane: 0
+  - beat: 506.3318
+    lane: 3
+  - beat: 506.8318
+    lane: 2
+  - beat: 506.8318
+    lane: 5
+  - beat: 507.8318
+    lane: 3
+  - beat: 508.83176
+    lane: 4
+  - beat: 509.83176
+    lane: 1
+  - beat: 510.83173
+    lane: 0
+  - beat: 511.83173
+    lane: 2
+  - beat: 512.8317
+    lane: 1
+  - beat: 513.8317
+    lane: 4
+  - beat: 515.8317
+    lane: 5
+  - beat: 515.8317
+    lane: 5
+  - beat: 516.83167
+    lane: 3
+  - beat: 517.83167
+    lane: 2
+  - beat: 518.83167
+    lane: 5
+  - beat: 519.83167
+    lane: 4
+  - beat: 520.83167
+    lane: 4
+  - beat: 521.8316
+    lane: 5
+  - beat: 522.8316
+    lane: 2
+  - beat: 523.3316
+    lane: 1
+  - beat: 523.3316
+    lane: 5
+  - beat: 524.3316
+    lane: 3
+  - beat: 525.3316
+    lane: 2
+  - beat: 526.3316
+    lane: 5
+  - beat: 527.3316
+    lane: 0
+  - beat: 528.33154
+    lane: 1
+  - beat: 529.33154
+    lane: 0
+  - beat: 530.33154
+    lane: 3
+  - beat: 532.33154
+    lane: 2
+  - beat: 532.33154
+    lane: 3
+  - beat: 533.33154
+    lane: 1
+  - beat: 534.33154
+    lane: 2
   hitTimes:
   - 2
   - 2
