@@ -14,8 +14,7 @@
 | 엔진 | Unity 6000.3.10f1 (URP) |
 | 언어 | C# |
 | 네트워크 | Photon PUN2 (Realtime, KR 리전) |
-| UI | uGUI + TextMeshPro |
-| 인원 | 2인 (Master / Guest) |
+| 음원 | Suno AI 자체 제작 |
 | 개발 방식 | Antigravity AI Agent 협업 |
 
 **핵심 컨셉** — 같은 곡 · 같은 채보 · 동시 시작 · 실시간 점수 비교 · 즉시 재대결
@@ -177,9 +176,15 @@ Assets/
 
 ---
 
-## AI Agent 협업 워크플로
+## AI 활용 워크플로
 
-**Google Antigravity AI Agent** 기반 개발
+| 도구 | 담당 |
+|---|---|
+| Google Antigravity AI Agent | 설계 · 구현 · 에디터 자동화 |
+| Suno AI | 게임 수록 음원 제작 |
+| Unity MCP | 에디터 직접 제어 연동 |
+
+### Antigravity — 개발
 
 | 영역 | 활용 |
 |---|---|
@@ -201,6 +206,16 @@ Canvas · EventSystem · 패널 · 버튼 · 텍스트 · 프리팹 · 참조 �
 
 수작업 UI 배치 제거 · 씬 구성 재현성 확보
 
+### Suno — 음원
+
+게임 수록곡 **Suno AI로 직접 제작**
+
+| 항목 | 내용 |
+|---|---|
+| 제작 | 프롬프트 기반 곡 생성 |
+| 장점 | 저작권 자유 · 템포 의도대로 조절 · 곡 추가 비용 최소 |
+| 활용 | BPM 확정 → beat 채보 작성 → `SongData` 등록 |
+
 ---
 
 ## 실행
@@ -218,6 +233,16 @@ Canvas · EventSystem · 패널 · 버튼 · 텍스트 · 프리팹 · 참조 �
 
 ## 수록곡
 
-| 곡 | BPM | 노트 |
-|---|---|---|
-| Electric Static | 130 | 6레인 채보 |
+**Suno AI 자체 제작 음원** — 외부 저작권 부담 없음 · 게임 템포에 맞춘 곡 직접 생성
+
+| 곡 | BPM | 채보 | 음원 |
+|---|---|---|---|
+| Electric Static | 130 | 6레인 | Suno AI 제작 |
+
+**음원 → 채보 파이프라인**
+
+```
+Suno AI 곡 생성  →  BPM 측정  →  beat 단위 채보 작성  →  SongData 에셋 등록
+```
+
+BPM 기준 채보 → 곡 교체 시 동일 워크플로 재사용
